@@ -1,0 +1,65 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  interval = 4
+}
+
+# order += "ipv6"
+# order += "disk /home"
+# order += "run_watch DHCP"
+# order += "run_watch VPN"
+order += "wireless wlan0"
+# order += "ethernet eth0"
+order += "battery 0"
+order += "battery 1"
+order += "volume master"
+order += "load"
+order += "time"
+
+wireless wlan0 {
+  format_up = "%bitrate %essid %ip"
+  format_down = "iwlan0 down"
+}
+
+ethernet eth0 {
+  # if you use %speed, i3status requires root privileges
+  format_up = "E: %ip"
+  format_down = "eth0 down"
+}
+
+battery 0 {
+  # format = "%status %percentage %remaining"
+  format = "Bat0:%percentage"
+}
+
+battery 1 {
+  # format = "%status %percentage %remaining"
+  format = "Bat1:%percentage"
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+time {
+  format = "%a %b %d %H:%M"
+}
+
+load {
+  format = "Load:%1min"
+}
+
+disk "/home" {
+        format = "%free"
+}
+
+volume master {
+  format = "♪%volume"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+}
